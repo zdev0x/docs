@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "代码片段",
+  title: "个人文档库",
   description: "收集一些平时工作中常用的代码片段",
   // Git 命令在部署环境中不可用时关闭 lastUpdated，避免构建失败
   lastUpdated: false,
