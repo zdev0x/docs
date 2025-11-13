@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import VPLocalSearchBox from 'vitepress/dist/client/theme-default/components/VPLocalSearchBox.vue'
 
 const input = ref('')
@@ -145,6 +145,18 @@ function handleInputFocus() {
   if (!hasLocalSearch) return
   openDocSearch()
 }
+
+onMounted(() => {
+  if (typeof document !== 'undefined') {
+    document.body.classList.add('home-hide-search')
+  }
+})
+
+onUnmounted(() => {
+  if (typeof document !== 'undefined') {
+    document.body.classList.remove('home-hide-search')
+  }
+})
 </script>
 
 <template>

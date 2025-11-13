@@ -278,6 +278,10 @@ html.dark .VPDocFooter .pager-link {
   letter-spacing: 0.04em;
 }
 
+body.home-hide-search .VPNavBarSearch {
+  display: none !important;
+}
+
 /* sidebar refresh */
 .VPSidebar {
   background: var(--vp-c-bg-alt);
