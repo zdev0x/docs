@@ -54,7 +54,7 @@ body {
 .VPDoc .container {
   width: 100%;
   max-width: none;
-  padding: 0 clamp(6px, 0.8vw, 16px) !important;
+  padding: 30px clamp(6px, 1.6vw, 40px) !important;
   margin: 0 !important;
 }
 
