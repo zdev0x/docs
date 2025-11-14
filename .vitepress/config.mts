@@ -1,10 +1,15 @@
 import { defineConfig } from 'vitepress'
+import fs from 'node:fs'
+
+const updatedFormatter = new Intl.DateTimeFormat('zh-CN', {
+  dateStyle: 'medium',
+  timeStyle: 'short'
+})
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "个人文档库",
   description: "收集一些平时工作中常用的代码片段",
-  // Git 命令在部署环境中不可用时关闭 lastUpdated，避免构建失败
   lastUpdated: false,
   
   // 启用深色模式切换
@@ -242,12 +247,16 @@ export default defineConfig({
     sidebarMenuLabel: '菜单',
     returnToTopLabel: '返回顶部',
     
-    lastUpdated: {
-      text: '最后更新',
-      formatOptions: {
-        dateStyle: 'short',
-        timeStyle: 'short'
-      }
+    lastUpdated: undefined
+  },
+  transformPageData(pageData) {
+    if (!pageData.filePath) return
+    try {
+      const stat = fs.statSync(pageData.filePath)
+      pageData.frontmatter.__lastUpdatedText = updatedFormatter.format(stat.mtime)
+      pageData.frontmatter.__lastUpdatedTimestamp = stat.mtimeMs
+    } catch (error) {
+      // ignore when running in environments without fs access
     }
   }
 })
